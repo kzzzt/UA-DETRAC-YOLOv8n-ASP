@@ -447,14 +447,16 @@ The authors thank the maintainers of the UA-DETRAC benchmark and of the Ultralyt
 
 Table~\ref{tab:perrun} lists the individual runs that underlie the means in Table~\ref{tab:pretrained}; the from-scratch runs are listed in the supplementary material. Reporting individual runs is what allows the reader to recompute the significance tests, and it also exposes occasional outliers (for example, an early peak followed by a long decline) that a mean would hide.
 
-%% A non-starred table with tabular* (the idiom used by the sn-jnl template for a
-%% full-width table) rather than the table* used elsewhere: table* can only be
-%% placed at the top of a page, so as the last float of the appendices it was
-%% deferred past \bibliography and printed inside the reference list, leaving the
-%% preceding page largely empty. This form can be placed in the running text.
-\begin{table}[!htbp]
+%% Deliberately not a float. As the last object of the appendices, this table was
+%% deferred by LaTeX twice: first as a table*, which printed it inside the
+%% reference list, and then as a non-starred table with [htbp], which still put it
+%% on the first bibliography page and left the preceding page almost empty.
+%% Defining \@captype lets the core \caption command emit the class's normal table
+%% caption without a float, so the table is typeset exactly where it is written.
+\begin{center}
+\def\@captype{table}%
 \caption{Pretrained regime, individual runs (\texttt{best} checkpoint, native protocol, full validation set).}\label{tab:perrun}%
-\centering
+\tablebodyfont
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lcccccc}
 \toprule
 Run & mAP@0.5 & mAP@[.5:.95] & Run & mAP@0.5 & mAP@[.5:.95]\\
@@ -470,7 +472,7 @@ p2\_s1 & $0.9123$ & $0.7454$ & eiou\_s1 & $0.9137$ & $0.7501$\\
 p2\_s2 & $0.9118$ & $0.7432$ & eiou\_s2 & $0.9146$ & $0.7354$\\
 \botrule
 \end{tabular*}
-\end{table}
+\end{center}
 
 \end{appendices}
 
