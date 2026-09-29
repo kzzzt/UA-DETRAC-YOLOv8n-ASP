@@ -84,6 +84,20 @@ for m in re.finditer(r"\\begin\{table\}(?:\[[^\]]*\])?(.*?)\\end\{table\}", tex,
         danger.append(tex[: m.start()].count("\n") + 1)
 print("adjustbox/resizebox inside single-column table:", danger or "none (OK)")
 
+# 7c) sn-basic.bst 会把 @article 的 journal 字段逐字符过一遍 remove.dots，
+#     静默删掉其中所有字面 "."（arXiv:2006.07159 -> arXiv:200607159）。
+#     花括号保护无效——那个函数不跟踪分组。预印本必须用 @misc + howpublished。
+#     另外 .bib 里 % 不是注释符，注释中若出现 @ 会被当成条目开头。
+dotjournals = []
+for m in re.finditer(r"@article\{([^,]+),(.*?)\n\}", bib, re.S):
+    jm = re.search(r"journal\s*=\s*\{(.*?)\}", m.group(2), re.S)
+    if jm and "." in jm.group(1):
+        dotjournals.append((m.group(1), jm.group(1)))
+print("article journal fields containing '.':", dotjournals or "none (OK)")
+stray = [m.group(0)[:40] for m in re.finditer(r"%[^\n]*@\w+", bib)]
+print("bib comments containing an at-sign:", stray or "none (OK)")
+
+
 n_tab = len(re.findall(r"\\begin\{table\}(?:\[[^\]]*\])?", tex))
 n_tabstar = len(re.findall(r"\\begin\{table\*\}", tex))
 n_adj = len(re.findall(r"\\begin\{adjustbox\}", tex))

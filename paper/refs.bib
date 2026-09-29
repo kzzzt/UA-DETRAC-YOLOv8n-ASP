@@ -38,18 +38,24 @@
   year      = {2019}
 }
 
-@article{ge2021yolox,
-  author  = {Ge, Zheng and Liu, Songtao and Wang, Feng and Li, Zeming and Sun, Jian},
-  title   = {{YOLOX}: Exceeding {YOLO} Series in {2021}},
-  journal = {arXiv preprint {arXiv:2107.08430}},
-  year    = {2021}
+% NOTE: sn-basic.bst applies its remove.dots function to the journal field of
+% regular articles, deleting every literal "." -- arXiv:2006.07159 was printed
+% as arXiv:200607159. Preprints are therefore entered as misc entries with a
+% howpublished field, which is not passed through remove.dots.
+% (This note must not contain an at-sign: BibTeX treats one as the start of an
+% entry even outside an entry.)
+@misc{ge2021yolox,
+  author       = {Ge, Zheng and Liu, Songtao and Wang, Feng and Li, Zeming and Sun, Jian},
+  title        = {{YOLOX}: Exceeding {YOLO} Series in {2021}},
+  howpublished = {arXiv preprint arXiv:2107.08430},
+  year         = {2021}
 }
 
-@article{li2022yolov6,
-  author  = {Li, Chuyi and Li, Lulu and Jiang, Hongliang and Weng, Kai and Geng, Yifei and Li, Liang and Ke, Zaidan and Li, Qingyuan and Cheng, Meng and Nie, Weiqiang and others},
-  title   = {{YOLOv6}: A Single-Stage Object Detection Framework for Industrial Applications},
-  journal = {arXiv preprint {arXiv:2209.02976}},
-  year    = {2022}
+@misc{li2022yolov6,
+  author       = {Li, Chuyi and Li, Lulu and Jiang, Hongliang and Weng, Kai and Geng, Yifei and Li, Liang and Ke, Zaidan and Li, Qingyuan and Cheng, Meng and Nie, Weiqiang and others},
+  title        = {{YOLOv6}: A Single-Stage Object Detection Framework for Industrial Applications},
+  howpublished = {arXiv preprint arXiv:2209.02976},
+  year         = {2022}
 }
 
 @inproceedings{wang2023yolov7,
@@ -181,11 +187,11 @@
   year      = {2022}
 }
 
-@article{kisantal2019augmentation,
-  author  = {Kisantal, Mate and Wojna, Zbigniew and Murawski, Jacek and Naruniec, Jacek and Cho, Kyunghyun},
-  title   = {Augmentation for Small Object Detection},
-  journal = {arXiv preprint {arXiv:1902.07296}},
-  year    = {2019}
+@misc{kisantal2019augmentation,
+  author       = {Kisantal, Mate and Wojna, Zbigniew and Murawski, Jacek and Naruniec, Jacek and Cho, Kyunghyun},
+  title        = {Augmentation for Small Object Detection},
+  howpublished = {arXiv preprint arXiv:1902.07296},
+  year         = {2019}
 }
 
 @article{cheng2023smallobject,
@@ -217,11 +223,11 @@
   year    = {2006}
 }
 
-@article{beyer2020imagenet,
-  author  = {Beyer, Lucas and H{\'e}naff, Olivier J. and Kolesnikov, Alexander and Zhai, Xiaohua and van den Oord, A{\"a}ron},
-  title   = {Are We Done with {ImageNet}?},
-  journal = {arXiv preprint {arXiv:2006.07159}},
-  year    = {2020}
+@misc{beyer2020imagenet,
+  author       = {Beyer, Lucas and H{\'e}naff, Olivier J. and Kolesnikov, Alexander and Zhai, Xiaohua and van den Oord, A{\"a}ron},
+  title        = {Are We Done with {ImageNet}?},
+  howpublished = {arXiv preprint arXiv:2006.07159},
+  year         = {2020}
 }
 
 @inproceedings{he2019bag,
@@ -247,11 +253,11 @@
   year      = {2017}
 }
 
-@article{bochkovskiy2020yolov4,
-  author  = {Bochkovskiy, Alexey and Wang, Chien-Yao and Liao, Hong-Yuan Mark},
-  title   = {{YOLOv4}: Optimal Speed and Accuracy of Object Detection},
-  journal = {arXiv preprint {arXiv:2004.10934}},
-  year    = {2020}
+@misc{bochkovskiy2020yolov4,
+  author       = {Bochkovskiy, Alexey and Wang, Chien-Yao and Liao, Hong-Yuan Mark},
+  title        = {{YOLOv4}: Optimal Speed and Accuracy of Object Detection},
+  howpublished = {arXiv preprint arXiv:2004.10934},
+  year         = {2020}
 }
 
 @inproceedings{misra2021triplet,
@@ -287,9 +293,9 @@
   year      = {2019}
 }
 
-@article{michaelis2019benchmarking,
-  author  = {Michaelis, Claudio and Mitzkus, Benjamin and Geirhos, Robert and Rusak, Evgenia and Bringmann, Oliver and Ecker, Alexander S. and Bethge, Matthias and Brendel, Wieland},
-  title   = {Benchmarking Robustness in Object Detection: Autonomous Driving When Winter Is Coming},
-  journal = {arXiv preprint {arXiv:1907.07484}},
-  year    = {2019}
+@misc{michaelis2019benchmarking,
+  author       = {Michaelis, Claudio and Mitzkus, Benjamin and Geirhos, Robert and Rusak, Evgenia and Bringmann, Oliver and Ecker, Alexander S. and Bethge, Matthias and Brendel, Wieland},
+  title        = {Benchmarking Robustness in Object Detection: Autonomous Driving When Winter Is Coming},
+  howpublished = {arXiv preprint arXiv:1907.07484},
+  year         = {2019}
 }
