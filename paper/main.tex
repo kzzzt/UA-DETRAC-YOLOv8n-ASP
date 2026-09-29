@@ -296,6 +296,8 @@ Table~\ref{tab:size} reports the COCO-protocol size breakdown. The direction of 
 
 One number deserves emphasis. The P2 variant shows a large nominal AP\textsubscript{small} gain with the \texttt{best} checkpoint ($+0.0126$), yet its three seed values are $0.4189$, $0.3642$ and $0.4205$: a standard deviation of $0.0321$, four times that of the baseline. A single-run report would thus have produced a very convincing, and very misleading, claim that the P2 head "substantially improves small-object detection". Figure~\ref{fig:size} shows the same breakdown for the pretrained regime, where the seed spread is comparable. We therefore advise against reporting size-bucketed gains without seed variation, precisely because the buckets are computed on relatively few objects and are correspondingly noisy.
 
+\paragraph{A protocol-dependent precision effect.} The COCO evaluation that produces the size buckets also reports whole-run precision, and for SimAM in the from-scratch regime it is significantly lower than the baseline ($0.8497 \pm 0.0123$ versus $0.8817 \pm 0.0062$, a difference of $-0.0319$ with $p<0.05$), whereas the same comparison under the native protocol is not significant ($-0.0302$). This is a second instance of the sensitivity documented in Section~\ref{sec:protocols}: the scoring routine can change not only the size of a difference but whether it is significant at all. It is one reason we keep whole-run precision and recall on the native protocol and use the COCO routine only for the size buckets.
+
 \begin{table*}[t]
 \caption{COCO-protocol size breakdown (from-scratch, \texttt{best} checkpoint, three seeds). Differences versus the baseline are shown in parentheses; all are non-significant.}\label{tab:size}%
 \centering
