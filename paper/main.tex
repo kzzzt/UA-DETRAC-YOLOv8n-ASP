@@ -447,11 +447,15 @@ The authors thank the maintainers of the UA-DETRAC benchmark and of the Ultralyt
 
 Table~\ref{tab:perrun} lists the individual runs that underlie the means in Table~\ref{tab:pretrained}; the from-scratch runs are listed in the supplementary material. Reporting individual runs is what allows the reader to recompute the significance tests, and it also exposes occasional outliers (for example, an early peak followed by a long decline) that a mean would hide.
 
-\begin{table*}[t]
+%% A non-starred table with tabular* (the idiom used by the sn-jnl template for a
+%% full-width table) rather than the table* used elsewhere: table* can only be
+%% placed at the top of a page, so as the last float of the appendices it was
+%% deferred past \bibliography and printed inside the reference list, leaving the
+%% preceding page largely empty. This form can be placed in the running text.
+\begin{table}[!htbp]
 \caption{Pretrained regime, individual runs (\texttt{best} checkpoint, native protocol, full validation set).}\label{tab:perrun}%
 \centering
-\begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{@{}lcccccc@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lcccccc}
 \toprule
 Run & mAP@0.5 & mAP@[.5:.95] & Run & mAP@0.5 & mAP@[.5:.95]\\
 \midrule
@@ -465,18 +469,10 @@ p2\_s0 & $0.9110$ & $0.7441$ & eiou\_s0 & $0.9062$ & $0.7390$\\
 p2\_s1 & $0.9123$ & $0.7454$ & eiou\_s1 & $0.9137$ & $0.7501$\\
 p2\_s2 & $0.9118$ & $0.7432$ & eiou\_s2 & $0.9146$ & $0.7354$\\
 \botrule
-\end{tabular}
-\end{adjustbox}
-\end{table*}
+\end{tabular*}
+\end{table}
 
 \end{appendices}
-
-%% Flush the pending appendix float before the reference list begins.
-%% Table B1 is a table* and the last float in the document; without this,
-%% LaTeX defers it and prints it at the top of the first bibliography page,
-%% so it appears inside the reference list and leaves the References heading
-%% with a single entry followed by a large gap.
-\clearpage
 
 \bibliography{refs}% common bib file
 
