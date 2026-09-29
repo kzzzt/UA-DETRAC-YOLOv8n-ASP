@@ -38,9 +38,12 @@
 
 %%=============================================================%%
 %% Author information                                          %%
-%% Single author. Affiliation: Jinan University, Zhuhai Campus. %%
+%% Z. Kang is the first author; X. Liu is the corresponding     %%
+%% author and is therefore starred, following the sn-jnl        %%
+%% template convention. Both share affiliation [1].             %%
 %%=============================================================%%
-\author*[1]{\fnm{Zhitong} \sur{Kang}}\email{kangzt@stu2024.jnu.edu.cn}
+\author[1]{\fnm{Zhitong} \sur{Kang}}\email{kangzt@stu2024.jnu.edu.cn}
+\author*[1]{\fnm{Xiaoxiang} \sur{Liu}}\email{tlxx@jnu.edu.cn}
 
 \affil*[1]{\orgdiv{School of Intelligent Systems Science and Engineering}, \orgname{Jinan University}, \orgaddress{\street{206 Qianshan Road, Xiangzhou District}, \city{Zhuhai}, \postcode{519070}, \state{Guangdong}, \country{China}}}
 
@@ -170,7 +173,7 @@ We use UA-DETRAC \cite{wen2020uadetrac} in the three-class setting (car, bus, va
 
 \subsection{Training protocol}
 
-All models are trained at an input resolution of $640\times640$ with the standard Ultralytics recipe: SGD-based optimizer with initial learning rate $0.01$, momentum $0.9$, weight decay $5\times10^{-4}$, cosine learning-rate schedule \cite{loshchilov2017sgdr}, three warm-up epochs, mosaic augmentation enabled for all but the last ten epochs, and a nominal batch size of $64$. Two regimes are studied.
+All models are trained at an input resolution of $640\times640$ with the standard Ultralytics recipe: SGD-based optimizer with initial learning rate $0.01$, momentum $0.9$, weight decay $5\times10^{-4}$, cosine annealing of the learning rate without warm restarts (the SGDR schedule \cite{loshchilov2017sgdr} with the restart term omitted), three warm-up epochs, mosaic augmentation enabled for all but the last ten epochs, and a nominal batch size of $64$. Two regimes are studied.
 \begin{itemize}
 \item \textbf{From scratch.} 100 epochs with early stopping (patience 20) on an NVIDIA RTX 4060 Laptop GPU (8\,GB). Batch size 32 for the three-level variants and 16 for the four-level (P2) variants, the latter being a memory constraint of the 8\,GB device.
 \item \textbf{Pretrained.} Initialized from the COCO-pretrained \texttt{yolov8n.pt} checkpoint, 25 epochs, no early stopping, on an NVIDIA RTX 4090 D GPU (24\,GB). In this regime all variants use batch size 32.
@@ -411,19 +414,19 @@ The supplementary material contains: (i) the per-run metrics for all 36 training
 
 \bmhead{Acknowledgements}
 
-The author thanks the maintainers of the UA-DETRAC benchmark and of the Ultralytics library. Computational resources were provided by a rented NVIDIA RTX 4090 D instance and by a local NVIDIA RTX 4060 Laptop GPU.
+The authors thank the maintainers of the UA-DETRAC benchmark and of the Ultralytics library. Computational resources were provided by a rented NVIDIA RTX 4090 D instance and by a local NVIDIA RTX 4060 Laptop GPU.
 
 \section*{Declarations}
 
 \begin{itemize}
 \item \textbf{Funding:} Not applicable. This research received no external funding.
-\item \textbf{Conflict of interest/Competing interests:} The author declares no competing interests.
+\item \textbf{Conflict of interest/Competing interests:} The authors declare no competing interests.
 \item \textbf{Ethics approval and consent to participate:} Not applicable. This study uses only a publicly available, fully anonymized vehicle-detection dataset and involves no human or animal subjects.
 \item \textbf{Consent for publication:} Not applicable.
 \item \textbf{Data availability:} The UA-DETRAC dataset is publicly available from its official benchmark website. The derived evaluation tables, per-run metrics and figure-generating scripts that support the findings of this study are included as supplementary material and are also available from the corresponding author on reasonable request.
 \item \textbf{Materials availability:} Not applicable.
 \item \textbf{Code availability:} The complete source code, model configurations, training and evaluation scripts, significance-testing utilities and the scripts that regenerate every table and figure in this paper are openly available at \url{https://github.com/kzzzt/UA-DETRAC-YOLOv8n-ASP}.
-\item \textbf{Author contribution:} Z.K. designed the study, implemented the model variants and the analysis pipeline, conducted all experiments and analyses, and wrote the manuscript.
+\item \textbf{Author contribution:} Z.K. designed the study, implemented the model variants and the analysis pipeline, conducted all experiments and analyses, and wrote the manuscript. X.L. supervised the study and revised the manuscript. Both authors read and approved the final manuscript.
 \end{itemize}
 
 \begin{appendices}

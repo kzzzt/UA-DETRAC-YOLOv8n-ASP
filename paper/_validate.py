@@ -97,6 +97,26 @@ print("article journal fields containing '.':", dotjournals or "none (OK)")
 stray = [m.group(0)[:40] for m in re.finditer(r"%[^\n]*@\w+", bib)]
 print("bib comments containing an at-sign:", stray or "none (OK)")
 
+# 7d) 作者块：sn-jnl 用 \author*[n]{...} 标记通讯作者，应当恰好一位；
+#     同时检查全文与投稿信里没有残留"单作者"措辞。
+n_reg = len(re.findall(r"\\author(?!\*)\s*\[", tex))
+n_star = len(re.findall(r"\\author\*\s*\[", tex))
+print(f"authors: {n_reg} regular + {n_star} corresponding ->",
+      "OK" if n_star == 1 else "CHECK (expected exactly one \\author*)")
+for m in re.finditer(r"\\author(\*?)\s*\[[^\]]*\]\{((?:[^{}]|\{[^{}]*\})*)\}\s*\\email\{([^}]*)\}", tex):
+    print(f"   {'*' if m.group(1) else ' '} {m.group(2).strip()} <{m.group(3)}>")
+leftover = [ln.strip()[:60] for ln in tex.splitlines()
+            if re.search(r"sole author|the author thanks|the author declares", ln, re.I)]
+print("single-author phrasing left in main.tex:", leftover or "none (OK)")
+
+letter = PAPER / "cover_letter.md"
+if letter.exists():
+    lt = letter.read_text(encoding="utf-8")
+    bad = [ln.strip()[:60] for ln in lt.splitlines()
+           if re.search(r"sole author|\bI am pleased\b|\bI study\b|\bI believe\b|\bI look forward\b", ln)]
+    print("single-author phrasing left in cover_letter.md:", bad or "none (OK)")
+
+
 
 n_tab = len(re.findall(r"\\begin\{table\}(?:\[[^\]]*\])?", tex))
 n_tabstar = len(re.findall(r"\\begin\{table\*\}", tex))

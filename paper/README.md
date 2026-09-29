@@ -51,8 +51,8 @@ pdflatex main
 
 | 项 | 值 | 状态 |
 |----|-----|------|
-| 作者 | Zhitong Kang（康智童，单作者）| ✅ 已填 |
-| 邮箱 | kangzt@stu2024.jnu.edu.cn | ✅ 已填 |
+| 作者 | Zhitong Kang（康智童，第一作者）+ Xiaoxiang Liu（刘晓翔，通讯作者）| ✅ 已填 |
+| 邮箱 | kangzt@stu2024.jnu.edu.cn（一作）；tlxx@jnu.edu.cn（通讯，`\author*` 标记）| ✅ 已填 |
 | 单位 | School of Intelligent Systems Science and Engineering, Jinan University（暨南大学珠海校区智能科学与工程学院）| ✅ 已填 |
 | 地址 | 206 Qianshan Road, Xiangzhou District, Zhuhai 519070, Guangdong, China | ⚠️ 请核对（前山路 206 号 / 519070）|
 | 参考文献制式 | `sn-basic` + `Numbered`（Applied Intelligence 用编号制 Springer Basic）| ✅ 已切换 |

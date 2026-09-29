@@ -31,3 +31,6 @@ Thumbs.db
 # match "__init__.py" and silently drop the package initialisers.
 /_*.py
 /_*.sh
+
+# editor/script backups
+*.bak
