@@ -159,3 +159,4 @@ and the UA-DETRAC benchmark:
 
 MIT (see `LICENSE`). The LaTeX class file `sn-jnl.cls` and the bibliography styles under
 `paper/` are distributed by Springer Nature and are **not** covered by this license.
+"# UA-DETRAC-YOLOv8n-ASP" 
