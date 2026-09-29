@@ -144,14 +144,16 @@ def main() -> None:
                             rec[key] = float(row[key])
                         except ValueError:
                             pass
-            # eval_scenes.py 在**完整 val 集**上的整体指标。
-            # 训练期若使用监控子集（configs/ua_detrac_monitor.yaml），
-            # checkpoint 里的 train_metrics 只反映子集，必须用这里的数值。
-            for metric in ("mAP50", "mAP50-95"):
+            # eval_scenes.py 在**完整 val 集**上的整体指标优先。
+            # 训练期若使用监控子集（configs/ua_detrac_monitor.yaml），checkpoint 里的
+            # train_metrics 只反映子集；即便用完整 val 集，事后复评与训练期验证器的
+            # 设置也略有差异。因此 mAP、P、R 一律以该 CSV 为准，保证本文件与
+            # significance_report.md 同源（曾因只覆盖 mAP、漏掉 P/R 而在第四位小数上不一致）。
+            for metric in ("mAP50", "mAP50-95", "P", "R"):
                 key = f"overall_{metric}"
                 if row.get(key):
                     try:
-                        rec[f"eval_{metric}"] = float(row[key])
+                        rec[f"best_{metric}"] = float(row[key])
                     except ValueError:
                         pass
         groups.setdefault(var, []).append(rec)
@@ -180,19 +182,16 @@ def main() -> None:
     print("多种子结果汇总（best.pt 与 last.pt 分别给出，括号内为样本数 n）")
     print("=" * 90)
 
-    table("整体指标（best.pt，checkpoint 训练期记录）", [
+    table("整体指标（best.pt，完整 val 集评估）", [
         ("mAP50", "best_mAP50"), ("mAP50-95", "best_mAP50-95"),
         ("P", "best_P"), ("R", "best_R"),
     ])
-    if any("eval_mAP50" in r for r in sum(groups.values(), [])):
-        print("\n[说明] 下表来自 eval_scenes.py 在**完整 val 集**上的评估"
-              "（训练期用监控子集时，上表只反映子集，请以此表为准）")
-        table("整体指标（完整 val 集评估）", [
-            ("mAP50", "eval_mAP50"), ("mAP50-95", "eval_mAP50-95"),
-        ])
-    table("整体指标（last.pt，消除取峰值偏差）", [
+    print("\n[说明] 上表四个指标均取自 eval_scenes.py 在**完整 val 集**上的评估，"
+          "与 significance_report.md 同源。")
+    table("整体指标（last.pt，checkpoint 训练期记录）", [
         ("mAP50", "last_mAP50"), ("mAP50-95", "last_mAP50-95"),
     ])
+    print("\n[说明] last 权重未在完整 val 集上复评，上表保留 checkpoint 训练期数值。")
 
     if scene:
         table("分场景 mAP50（best.pt）",
