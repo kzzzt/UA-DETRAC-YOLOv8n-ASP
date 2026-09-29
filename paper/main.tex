@@ -143,10 +143,10 @@ where $\mathbf{b}$ and $\mathbf{b}^{gt}$ are the centres of the predicted and gr
 
 We define six variants, summarized in Table~\ref{tab:variants}. ASP denotes the full combination (SimAM + P2 + EIoU).
 
-\begin{table}[h]
+\begin{table*}[t]
 \caption{Model variants and their complexity. SimAM adds no parameters; the P2 level raises the computational cost by about $51\%$.}\label{tab:variants}%
 \centering
-\begin{adjustbox}{max width=\columnwidth}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{@{}llrrl@{}}
 \toprule
 Variant & Composition & Params & GFLOPs & SimAM layers\\
@@ -160,7 +160,7 @@ asp & baseline + SimAM + P2 + EIoU & 2{,}926{,}956 & 12.4 & 4 (P2--P5)\\
 \botrule
 \end{tabular}
 \end{adjustbox}
-\end{table}
+\end{table*}
 
 \section{Experimental Setup}\label{sec:setup}
 
@@ -182,8 +182,7 @@ Every variant is trained with three random seeds (0, 1, 2); all reported numbers
 \begin{table}[h]
 \caption{Controlled factors. Only the model structure, the regression loss and the random seed vary within a table; everything else is identical.}\label{tab:identical}%
 \centering
-\begin{adjustbox}{max width=\columnwidth}
-\begin{tabular}{@{}p{0.34\textwidth}p{0.58\textwidth}@{}}
+\begin{tabular}{@{}p{0.34\columnwidth}p{0.58\columnwidth}@{}}
 \toprule
 Item & Setting\\
 \midrule
@@ -196,7 +195,6 @@ Seeds & 0, 1, 2 (independent runs; mean $\pm$ std reported)\\
 Validation & 12 held-out sequences, 16{,}645 images\\
 \botrule
 \end{tabular}
-\end{adjustbox}
 \end{table}
 
 \subsection{Evaluation protocols}\label{sec:protocols}
@@ -295,10 +293,10 @@ Table~\ref{tab:size} reports the COCO-protocol size breakdown. The direction of 
 
 One number deserves emphasis. The P2 variant shows the largest nominal AP\textsubscript{small} gain with the \texttt{best} checkpoint ($+0.0126$), yet its three seed values are $0.4189$, $0.3642$ and $0.4205$: a standard deviation of $0.0321$, four times that of the baseline. A single-run report would thus have produced a very convincing, and very misleading, claim that the P2 head "substantially improves small-object detection". Figure~\ref{fig:size} shows the same breakdown for the pretrained regime, where the seed spread is comparable. We therefore advise against reporting size-bucketed gains without seed variation, precisely because the buckets are computed on relatively few objects and are correspondingly noisy.
 
-\begin{table}[h]
+\begin{table*}[t]
 \caption{COCO-protocol size breakdown (from-scratch, \texttt{best} checkpoint, three seeds). Differences versus the baseline are shown in parentheses; all are non-significant.}\label{tab:size}%
 \centering
-\begin{adjustbox}{max width=\columnwidth}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{@{}lccc@{}}
 \toprule
 Variant & AP\textsubscript{small} & AP\textsubscript{medium} & AP\textsubscript{large}\\
@@ -312,7 +310,7 @@ asp       & $0.3911 \pm 0.0050$ $(+0.0025)$ & $\mathbf{0.6510 \pm 0.0137}$ $(+0.
 \botrule
 \end{tabular}
 \end{adjustbox}
-\end{table}
+\end{table*}
 
 \begin{figure*}[t]
 \includegraphics[width=\textwidth]{fig2_by_size}
@@ -444,10 +442,10 @@ The author thanks the maintainers of the UA-DETRAC benchmark and of the Ultralyt
 
 Table~\ref{tab:perrun} lists the individual runs that underlie the means in Table~\ref{tab:pretrained}; the from-scratch runs are listed in the supplementary material. Reporting individual runs is what allows the reader to recompute the significance tests, and it also exposes occasional outliers (for example, an early peak followed by a long decline) that a mean would hide.
 
-\begin{table}[h]
+\begin{table*}[t]
 \caption{Pretrained regime, individual runs (\texttt{best} checkpoint, native protocol, full validation set).}\label{tab:perrun}%
 \centering
-\begin{adjustbox}{max width=\columnwidth}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
 Run & mAP@0.5 & mAP@[.5:.95] & Run & mAP@0.5 & mAP@[.5:.95]\\
@@ -464,7 +462,7 @@ p2\_s2 & $0.9118$ & $0.7432$ & eiou\_s2 & $0.9146$ & $0.7354$\\
 \botrule
 \end{tabular}
 \end{adjustbox}
-\end{table}
+\end{table*}
 
 \end{appendices}
 
