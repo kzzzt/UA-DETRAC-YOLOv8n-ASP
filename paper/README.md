@@ -36,7 +36,7 @@ pdflatex main
 |------------|------|------|
 | `File 'figures/fig1_overall.png' not found`（×3）| 旧 zip 由 PowerShell `Compress-Archive` 生成，条目名是**反斜杠**（`figures\fig1.png`），Overleaf 在 Linux 上解压后目录结构丢失 | 改用 `python paper/_package.py` 打包（正斜杠）；同时正文加 `\graphicspath{{figures/}{./}}` 并把 `\includegraphics` 改为不带扩展名的写法，图片放 `figures/` 或与 `main.tex` 同级都能找到 |
 | `Font shape 'U/rsfs/m/n' not available`（×3）| 模板预置的 `mathrsfs` 宏包在本机字体集下缺少 Type1 字体，而正文并未使用 `\mathscr` | 删除 `\usepackage{mathrsfs}` |
-| `Overfull \hbox (123.73pt too wide)` 表 3、`(21.98pt too wide)` 表 4 | 7 列 / 9 列宽表内容超出版心 | 引入 `adjustbox`，两张表用 `\begin{adjustbox}{max width=\textwidth}` 包裹（**只在超宽时缩小，不会把小表放大**）；同时给全部 7 张表补 `\centering` |
+| `Overfull \hbox` 表格超出版心（表 3、表 4、表 6 均出现过）| 7 列表 / 9 列表 / 6 列表的内容宽于版心 | **全部 7 张表**统一用 `\begin{adjustbox}{max width=...}` 包裹：`table*` 用 `\textwidth`、单栏 `table` 用 `\columnwidth`（**只在超宽时缩小，不会把小表放大**）；并统一加了 `\centering` |
 | `hyperref Warning: Difference (N) between bookmark levels ...`（6 条）| `sn-jnl.cls` 把 `\bmhead` 定义为 `\@startsection` 的**第 5 级（subparagraph）**，从 1 级的 section 直接跳到 5 级 | 在 hyperref 之后加载 `\usepackage{bookmark}` 重建 PDF 书签树，警告消失且书签保留 |
 | `Underfull \hbox (badness 1048) ... lines 42--42` | `\maketitle` 处的标题/作者块断行留白 | 纯外观，可忽略 |
 | `Underfull \vbox (badness 10000) has occurred while \output is active` | 某页纵向拉伸（浮动体排布所致）| 纯外观，可忽略；若要消除可微调浮动体位置或增删文字 |

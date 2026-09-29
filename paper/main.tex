@@ -146,6 +146,7 @@ We define six variants, summarized in Table~\ref{tab:variants}. ASP denotes the 
 \begin{table}[h]
 \caption{Model variants and their complexity. SimAM adds no parameters; the P2 level raises the computational cost by about $51\%$.}\label{tab:variants}%
 \centering
+\begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}llrrl@{}}
 \toprule
 Variant & Composition & Params & GFLOPs & SimAM layers\\
@@ -158,6 +159,7 @@ simam\_p2 & baseline + SimAM + P2 & 2{,}926{,}956 & 12.4 & 4 (P2--P5)\\
 asp & baseline + SimAM + P2 + EIoU & 2{,}926{,}956 & 12.4 & 4 (P2--P5)\\
 \botrule
 \end{tabular}
+\end{adjustbox}
 \end{table}
 
 \section{Experimental Setup}\label{sec:setup}
@@ -180,6 +182,7 @@ Every variant is trained with three random seeds (0, 1, 2); all reported numbers
 \begin{table}[h]
 \caption{Controlled factors. Only the model structure, the regression loss and the random seed vary within a table; everything else is identical.}\label{tab:identical}%
 \centering
+\begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}p{0.34\textwidth}p{0.58\textwidth}@{}}
 \toprule
 Item & Setting\\
@@ -193,6 +196,7 @@ Seeds & 0, 1, 2 (independent runs; mean $\pm$ std reported)\\
 Validation & 12 held-out sequences, 16{,}645 images\\
 \botrule
 \end{tabular}
+\end{adjustbox}
 \end{table}
 
 \subsection{Evaluation protocols}\label{sec:protocols}
@@ -294,6 +298,7 @@ One number deserves emphasis. The P2 variant shows the largest nominal AP\textsu
 \begin{table}[h]
 \caption{COCO-protocol size breakdown (from-scratch, \texttt{best} checkpoint, three seeds). Differences versus the baseline are shown in parentheses; all are non-significant.}\label{tab:size}%
 \centering
+\begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}lccc@{}}
 \toprule
 Variant & AP\textsubscript{small} & AP\textsubscript{medium} & AP\textsubscript{large}\\
@@ -306,6 +311,7 @@ simam\_p2 & $0.3893 \pm 0.0213$ $(+0.0007)$ & $0.6493 \pm 0.0130$ $(+0.0181)$ & 
 asp       & $0.3911 \pm 0.0050$ $(+0.0025)$ & $\mathbf{0.6510 \pm 0.0137}$ $(+0.0198)$ & $0.8108 \pm 0.0064$ $(-0.0007)$\\
 \botrule
 \end{tabular}
+\end{adjustbox}
 \end{table}
 
 \begin{figure*}[t]
@@ -330,6 +336,7 @@ Two comparisons between the regimes are worth stating explicitly, because they a
 \begin{table*}[t]
 \caption{Pretrained regime (COCO-pretrained \texttt{yolov8n.pt}, 25 epochs, no early stopping, three seeds). Native protocol, full validation set. Upper block: \texttt{best} checkpoint; lower block: \texttt{last} checkpoint. All overall differences are non-significant.}\label{tab:pretrained}%
 \centering
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 Variant & mAP@0.5 & mAP@[0.5:0.95] & AP\textsubscript{small} & AP\textsubscript{medium} & AP\textsubscript{large}\\
@@ -351,6 +358,7 @@ simam\_p2 & $0.8940 \pm 0.0070$ & $\mathbf{0.7323 \pm 0.0055}$ & $0.3895 \pm 0.0
 asp       & $0.8916 \pm 0.0047$ & $0.7262 \pm 0.0035$ & $0.3844 \pm 0.0044$ & $0.6599 \pm 0.0158$ & $0.8077 \pm 0.0038$\\
 \botrule
 \end{tabular}
+\end{adjustbox}
 \end{table*}
 
 \begin{figure*}[t]
@@ -439,6 +447,7 @@ Table~\ref{tab:perrun} lists the individual runs that underlie the means in Tabl
 \begin{table}[h]
 \caption{Pretrained regime, individual runs (\texttt{best} checkpoint, native protocol, full validation set).}\label{tab:perrun}%
 \centering
+\begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
 Run & mAP@0.5 & mAP@[.5:.95] & Run & mAP@0.5 & mAP@[.5:.95]\\
@@ -454,6 +463,7 @@ p2\_s1 & $0.9123$ & $0.7454$ & eiou\_s1 & $0.9137$ & $0.7501$\\
 p2\_s2 & $0.9118$ & $0.7432$ & eiou\_s2 & $0.9146$ & $0.7354$\\
 \botrule
 \end{tabular}
+\end{adjustbox}
 \end{table}
 
 \end{appendices}
