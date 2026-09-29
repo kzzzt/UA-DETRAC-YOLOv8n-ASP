@@ -1,0 +1,11 @@
+# UA-DETRAC 数据集配置（YOLO 格式）
+# 类别映射：car=0, bus=1, van=2
+
+path: ua_detrac      # 数据集根目录（相对 ultralytics datasets_dir）
+train: images/train         # 训练图像相对路径
+val: images/val             # 验证图像相对路径
+
+names:
+  0: car
+  1: bus
+  2: van

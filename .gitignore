@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Training outputs and weights (reproducible; keeps the repository small)
+runs/
+*.pt
+*.pth
+*.onnx
+*.cache
+
+# Dataset artefacts -- raw images are not committed, but the figures used in the
+# paper and documentation are (see the negations below)
+datasets/
+*.jpg
+*.png
+!docs/figures/*.png
+!paper/figures/*.png
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary helper scripts, only if placed at the repository root.
+# NOTE: anchored with a leading slash on purpose -- a bare "_*.py" would also
+# match "__init__.py" and silently drop the package initialisers.
+/_*.py
+/_*.sh

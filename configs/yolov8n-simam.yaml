@@ -1,0 +1,49 @@
+# YOLOv8n-SimAM 消融变体：仅注意力增强，检测头仍为 P3/P4/P5。
+#
+# SimAM 作为独立无参层，接在每个检测头特征图（P3/P4/P5）之后、Detect 之前：
+#   15 = P3 检测特征，18 = P4 检测特征，21 = P5 检测特征。
+# 由于 SimAM 不改变通道数与分辨率，可直接被 ultralytics 通用解析路径构建，
+# 无需任何特殊注册逻辑。
+#
+# 用于与 baseline(yolov8n.yaml) 对比，单独验证 SimAM 注意力的贡献。
+
+nc: 3
+scales:
+  n: [0.33, 0.25, 1024]   # depth, width, max_channels
+
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, Conv, [64, 3, 2]]        # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]]       # 1-P2/4
+  - [-1, 3, C2f, [128, True]]        # 2
+  - [-1, 1, Conv, [256, 3, 2]]       # 3-P3/8
+  - [-1, 6, C2f, [256, True]]        # 4
+  - [-1, 1, Conv, [512, 3, 2]]       # 5-P4/16
+  - [-1, 6, C2f, [512, True]]        # 6
+  - [-1, 1, Conv, [1024, 3, 2]]      # 7-P5/32
+  - [-1, 3, C2f, [1024, True]]       # 8
+  - [-1, 1, SPPF, [1024, 5]]         # 9
+
+head:
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 6], 1, Concat, [1]]        # cat backbone P4
+  - [-1, 3, C2f, [512]]              # 12 (P4 neck)
+
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 4], 1, Concat, [1]]        # cat backbone P3
+  - [-1, 3, C2f, [256]]              # 15 (P3/8-small 检测特征)
+
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 12], 1, Concat, [1]]       # cat head P4
+  - [-1, 3, C2f, [512]]              # 18 (P4/16-medium 检测特征)
+
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 9], 1, Concat, [1]]        # cat head P5
+  - [-1, 3, C2f, [1024]]             # 21 (P5/32-large 检测特征)
+
+  # SimAM 无参注意力：接在每个检测头特征图之后
+  - [15, 1, SimAM, []]               # 22 (P3 attention)
+  - [18, 1, SimAM, []]               # 23 (P4 attention)
+  - [21, 1, SimAM, []]               # 24 (P5 attention)
+
+  - [[22, 23, 24], 1, Detect, [nc]]  # Detect(P3, P4, P5)

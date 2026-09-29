@@ -1,0 +1,24 @@
+# UA-DETRAC 验证集序列（按官方天气标签 sence_weather 均衡挑选）
+# 共 12 个序列（约 20%）：sunny / cloudy / night / rainy 各 3 个，
+# 保证分场景评估（晴/阴/夜/雨）每类都有验证数据。
+# 用法：python scripts/convert_detrac.py --detrac_dir <DETRAC_raw> --val_sequences val_list.txt
+
+# sunny (3)
+MVI_20011
+MVI_20052
+MVI_41063
+
+# cloudy (3)
+MVI_40141
+MVI_40191
+MVI_40244
+
+# night (3)
+MVI_39761
+MVI_39851
+MVI_40991
+
+# rainy (3)
+MVI_40871
+MVI_63544
+MVI_63563

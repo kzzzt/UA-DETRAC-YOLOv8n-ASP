@@ -1,0 +1,17 @@
+# UA-DETRAC 数据集配置（训练期监控子集版）
+#
+# 与 ua_detrac.yaml 的唯一区别：val 指向 monitor_val.txt（由
+# scripts/make_monitor_val.py 生成的 3000 张分层子集清单），用于大幅降低
+# 每轮验证耗时。**论文中的所有指标都不使用本配置**，而是在训练结束后用
+# scripts/eval_scenes.py / eval_by_size.py 在完整 val 集上重新评估。
+#
+# 类别映射：car=0, bus=1, van=2
+
+path: ua_detrac             # 数据集根目录（相对 ultralytics datasets_dir）
+train: images/train         # 训练图像相对路径
+val: monitor_val.txt        # 监控子集清单（每行一个绝对路径）
+
+names:
+  0: car
+  1: bus
+  2: van
