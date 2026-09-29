@@ -456,11 +456,14 @@ Table~\ref{tab:perrun} lists the individual runs that underlie the means in Tabl
 %% mechanism the caption package uses for \captionof. \makeatletter is required:
 %% outside it, @ is not a letter and \def\@captype would define \@ instead, which
 %% is what made \caption report "Caption outside float".
+%% The tabular is the plain @{}...@{} form used by the template's ordinary tables,
+%% at its natural width; only its "lengthy table" example stretches columns with
+%% \extracolsep\fill, which would leave conspicuous gaps in a table this narrow.
 \begin{center}
 \makeatletter\def\@captype{table}\makeatother
 \caption{Pretrained regime, individual runs (\texttt{best} checkpoint, native protocol, full validation set).}\label{tab:perrun}%
 \tablebodyfont
-\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lcccccc}
+\begin{tabular}{@{}lcccccc@{}}
 \toprule
 Run & mAP@0.5 & mAP@[.5:.95] & Run & mAP@0.5 & mAP@[.5:.95]\\
 \midrule
@@ -474,7 +477,7 @@ p2\_s0 & $0.9110$ & $0.7441$ & eiou\_s0 & $0.9062$ & $0.7390$\\
 p2\_s1 & $0.9123$ & $0.7454$ & eiou\_s1 & $0.9137$ & $0.7501$\\
 p2\_s2 & $0.9118$ & $0.7432$ & eiou\_s2 & $0.9146$ & $0.7354$\\
 \botrule
-\end{tabular*}
+\end{tabular}
 \end{center}
 
 \end{appendices}
