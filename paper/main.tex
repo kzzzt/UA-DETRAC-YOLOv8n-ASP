@@ -451,10 +451,13 @@ Table~\ref{tab:perrun} lists the individual runs that underlie the means in Tabl
 %% deferred by LaTeX twice: first as a table*, which printed it inside the
 %% reference list, and then as a non-starred table with [htbp], which still put it
 %% on the first bibliography page and left the preceding page almost empty.
-%% Defining \@captype lets the core \caption command emit the class's normal table
-%% caption without a float, so the table is typeset exactly where it is written.
+%% Defining \@captype makes \caption emit the class's normal table caption without
+%% a float, so the table is typeset exactly where it is written. This is the same
+%% mechanism the caption package uses for \captionof. \makeatletter is required:
+%% outside it, @ is not a letter and \def\@captype would define \@ instead, which
+%% is what made \caption report "Caption outside float".
 \begin{center}
-\def\@captype{table}%
+\makeatletter\def\@captype{table}\makeatother
 \caption{Pretrained regime, individual runs (\texttt{best} checkpoint, native protocol, full validation set).}\label{tab:perrun}%
 \tablebodyfont
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lcccccc}
