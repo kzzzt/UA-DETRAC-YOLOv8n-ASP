@@ -471,6 +471,13 @@ p2\_s2 & $0.9118$ & $0.7432$ & eiou\_s2 & $0.9146$ & $0.7354$\\
 
 \end{appendices}
 
+%% Flush the pending appendix float before the reference list begins.
+%% Table B1 is a table* and the last float in the document; without this,
+%% LaTeX defers it and prints it at the top of the first bibliography page,
+%% so it appears inside the reference list and leaves the References heading
+%% with a single entry followed by a large gap.
+\clearpage
+
 \bibliography{refs}% common bib file
 
 \end{document}
